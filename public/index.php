@@ -3,8 +3,8 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-require_once __DIR__ . '/../conn/connection.php';
-require_once __DIR__ . '/../services/ProductService.php';
+require_once __DIR__ . "/../conn/connection.php";
+require_once __DIR__ . "/../Services/ProductService.php";
 
 $connection = new Connection();
 $conn = $connection->getConnection();
@@ -54,22 +54,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_ids'])) {
         </div>
     </form>
     <footer class="endName">Scandiweb Test assignment</footer>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            fetch('/?action=fetch_products')
-                .then(response => response.json())
-                .then(products => {
-                    const container = document.getElementById('product-container');
-                    products.forEach(product => {
-                        const productElement = document.createElement('div');
-                        productElement.innerHTML = `
-                            <input type="checkbox" class="delete-checkbox" name="delete_ids[]" value="${product.id}">
-                            <span>${product.name}</span>
-                        `;
-                        container.appendChild(productElement);
-                    });
-                });
-        });
-    </script>
+    <script src="/backend/script.js"></script>
 </body>
 </html>
