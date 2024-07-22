@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../conn/connection.php';
-include_once __DIR__ . '/../data/product.php';
+include_once __DIR__ . '/../Data/product.php';
 
 class ProductService {
     private $conn;
@@ -18,9 +18,18 @@ class ProductService {
     }
 
     public function insertProduct($sku, $name, $price, $type, $additionalData) {
-        // Call the corresponding method for the product type
-        $method = $this->insertMethods[$type];
-        return call_user_func($method, $sku, $name, $price, $additionalData);
+        try {
+            // Call the corresponding method for the product type
+            $method = $this->insertMethods[$type];
+            return call_user_func($method, $sku, $name, $price, $additionalData);
+        } catch (PDOException $e) {
+            // Handle duplicate SKU error
+            if ($e->getCode() == '23000') { // Integrity constraint violation
+                throw new Exception("SKU already exists.");
+            }
+            // Re-throw other database errors
+            throw $e;
+        }
     }
 
     private function insertBook($sku, $name, $price, $additionalData) {
