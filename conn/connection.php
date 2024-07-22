@@ -1,6 +1,6 @@
 <?php
 class Connection {
-    private $servername = "localhost";
+    private $servername = "localhost"; 
     private $username = "root";
     private $password = "";
     private $db = "product";
