@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 ${product.type === 'book' && product.weight ? `<p>Weight: ${product.weight} KG</p>` : ''}
                 ${product.type === 'furniture' && product.height && product.width && product.length ? `<p>Dimension: ${product.height}x${product.width}x${product.length}</p>` : ''}
                 ${product.type === 'dvd' && product.size_mb ? `<p>Size: ${product.size_mb} MB</p>` : ''}
-                <input type="checkbox" class="deleteCheckbox" name="delete_ids[]" value="${product.id}">
+                <input type="checkbox" class="delete-checkbox" name="delete_ids[]" value="${product.id}">
             `;
 
             productContainer.appendChild(productBox);
